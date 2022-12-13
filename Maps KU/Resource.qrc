@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>graph.txt</file>
+        <file>maplegends-02.png</file>
+        <file>1670796076gravure-dragon-ball-videl-u-need-me-3.svg</file>
+    </qresource>
+</RCC>
