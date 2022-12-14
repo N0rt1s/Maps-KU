@@ -21,7 +21,6 @@ MapsKU::MapsKU(QWidget* parent)
     //ellipse = scene->addEllipse(3, 2, 100, 3, bluepen, redBrush);
   
 
-
     for (int i = 0; i < 12; i++)
     {
         this->data[i] = new QString[3];
@@ -48,7 +47,24 @@ void MapsKU :: on_calculate_path_clicked()
 {
     node_to_node_path(ui.source->currentIndex(), ui.destination->currentIndex(), djikstra(0, adjacencyList, vertices), vertices);
     QPen bluepen(Qt::blue);
-    scene->addLine(275, 70, 285, 200, bluepen);
+    int xs;
+    int ys;
+    int xd;
+    int yd;
+    for (size_t i = 0; i < 10; i++)
+    {
+        if (data[i][0] == ui.source->currentText()) {
+            QStringList pieces = data[i][2].split(",");
+            xs = pieces.value(pieces.length() - 2).toInt();
+            ys = pieces.value(pieces.length() - 1).toInt();
+        }
+        if (data[i][0] == ui.destination->currentText()) {
+            QStringList pieces = data[i][1].split(",");
+            xd = pieces.value(pieces.length() - 2).toInt();
+            yd = pieces.value(pieces.length() - 1).toInt();
+        }
+    }
+    scene->addLine(xs, ys, xd, yd, bluepen);
     ball = new QGraphicsEllipseItem(275, 73, 10, 10);
     timer = new QTimeLine(5000);
     timer->setFrameRange(0, 100);
