@@ -58,6 +58,15 @@ void MapsKU::on_calculate_path_clicked()
     //-------
     node_to_node_path(ui.source->currentIndex(), ui.destination->currentIndex(), djikstra(0, adjacencyList, vertices), vertices);
     QPen bluepen(Qt::blue);
+ //HEAD
+    //while (roadcount == 0) {
+     //   scene->addLine()
+   // }
+   // scene->addLine(128 , 220, 283, 204, bluepen);
+    scene->addLine(275, 70, 283, 204, bluepen);
+    scene->addLine(283, 204, 90, 231, bluepen);
+   // scene->addLine(data[indexsource][2], data[indexsource][2], data[indexdes][2], data[indexdes][2], bluepen);
+//=======
     int xs;
     int ys;
     int xd;
@@ -76,13 +85,7 @@ void MapsKU::on_calculate_path_clicked()
         }
     }
     scene->addLine(xs, ys, xd, yd, bluepen);
-    //while (roadcount == 0) {
-     //   scene->addLine()
-   // }
-   // scene->addLine(128 , 220, 283, 204, bluepen);
-    scene->addLine(275, 70, 283, 204, bluepen);
-    scene->addLine(283, 204, 90, 231, bluepen);
-   // scene->addLine(data[indexsource][2], data[indexsource][2], data[indexdes][2], data[indexdes][2], bluepen);
+//>>>>>>> 5c854a504f54162541047a9b76f770e934f43e55
     ball = new QGraphicsEllipseItem(275, 73, 10, 10);
     timer = new QTimeLine(5000);
     timer->setFrameRange(0, 100);
