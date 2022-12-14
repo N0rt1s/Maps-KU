@@ -13,6 +13,7 @@
 #include <qline>
 #include <QPropertyAnimation>
 #include <QGraphicsView>
+#include <QMessageBox>
 
 //#include <QtGui>
 using namespace std;

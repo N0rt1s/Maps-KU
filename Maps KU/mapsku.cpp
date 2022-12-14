@@ -1,6 +1,7 @@
 #include "mapsku.h"
 #include <QDebug>
 #include <QFile>
+#include <QMessageBox>
 
 MapsKU::MapsKU(QWidget* parent)
     : QMainWindow(parent)
@@ -27,28 +28,44 @@ MapsKU::MapsKU(QWidget* parent)
         this->data[i] = new QString[3];
     }
     this->data[0][0] = "Ubit"; data[0][1] = "24.945613, 67.115243"; data[0][2] = "275,70";
-    this->data[1][0] = "Chemistry Department"; data[1][1] = "24.942762, 67.121296"; data[1][2] = "275,70";
-    this->data[2][0] = "Mehmood HAssan Library"; data[2][1] = "24.939636, 67.121223"; data[2][2] = "275,70";
-    this->data[3][0] = "Pharmacy Department"; data[3][1] = "24.944090, 67.115438"; data[3][2] = "275,70";
-    this->data[4][0] = "Arts"; data[4][1] = "24.937694, 67.119783"; data[4][2] = "275,70";
-    this->data[5][0] = "IBA"; data[5][1] = "24.940204, 67.115175"; data[5][2] = "275,70";
-    this->data[6][0] = "Gymnasium Hall"; data[6][1] = "24.937921, 67.118324"; data[6][2] = "275,70";
-    this->data[7][0] = "Mathematics Department"; data[7][1] = "24.940104, 67.121523"; data[7][2] = "275,70";
-    this->data[8][0] = "Buisness School"; data[8][1] = "24.938317, 67.111457"; data[8][2] = "275,70";
-    this->data[9][0] = "Law Department"; data[9][1] = "24.937368, 67.109826"; data[9][2] = "275,70";
-    this->data[10][0] = "BioChemistry"; data[10][1] = "24.940158, 67.118221"; data[10][2] = "275,70";
-    this->data[11][0] = "Uni Chowrangi"; data[10][1] = "24.940862, 67.117081"; data[11][2] = "275,70";
+    this->data[1][0] = "Chemistry Canteen"; data[1][1] = "24.942762, 67.121296"; data[1][2] = "375,198"; //turn(283,204) 
+    this->data[2][0] = "Mehmood HAssan Library"; data[2][1] = "24.939636, 67.121223"; data[2][2] = "330,279";//turn (286,250)and(330,250)
+    this->data[3][0] = "Pharmacy Department"; data[3][1] = "24.944090, 67.115438"; data[3][2] = "280,120";
+    this->data[4][0] = "Arts"; data[4][1] = "24.937694, 67.119783"; data[4][2] = "320,303";//turn (290,303)
+    this->data[5][0] = "IBA"; data[5][1] = "24.940204, 67.115175"; data[5][2] = "215,205";//turn (283,204)
+    this->data[6][0] = "Gymnasium Hall"; data[6][1] = "24.937921, 67.118324"; data[6][2] = "288,273";
+    this->data[7][0] = "Mathematics Department"; data[7][1] = "24.940104, 67.121523"; data[7][2] = "357, 258";//turn (286,250) nad (354,252)
+    this->data[8][0] = "Buisness School"; data[8][1] = "24.938317, 67.111457"; data[8][2] = "128,220";//turn(283,204)
+    this->data[9][0] = "Law Department"; data[9][1] = "24.937368, 67.109826"; data[9][2] = "90, 231";
+    this->data[10][0] = "BioChemistry"; data[10][1] = "24.940158, 67.118221"; data[10][2] = "287,240";
+    this->data[11][0] = "Uni Chowrangi"; data[10][1] = "24.940862, 67.117081"; data[11][2] = "283,204";
     for (int i = 0; i < 12; i++)
     {
         ui.source->addItem(data[i][0]);
         ui.destination->addItem(data[i][0]);
     }
 }
-void MapsKU :: on_calculate_path_clicked()
-{
+void MapsKU::on_calculate_path_clicked()
+
+{//----
+    int indsrc = ui.source->currentIndex();
+    int inddes = ui.destination->currentIndex();
+    
+
+
+   
+      
+
+    //-------
     node_to_node_path(ui.source->currentIndex(), ui.destination->currentIndex(), djikstra(0, adjacencyList, vertices), vertices);
     QPen bluepen(Qt::blue);
-    scene->addLine(275, 70, 285, 200, bluepen);
+    //while (roadcount == 0) {
+     //   scene->addLine()
+   // }
+   // scene->addLine(128 , 220, 283, 204, bluepen);
+    scene->addLine(275, 70, 283, 204, bluepen);
+    scene->addLine(283, 204, 90, 231, bluepen);
+   // scene->addLine(data[indexsource][2], data[indexsource][2], data[indexdes][2], data[indexdes][2], bluepen);
     ball = new QGraphicsEllipseItem(275, 73, 10, 10);
     timer = new QTimeLine(5000);
     timer->setFrameRange(0, 100);
@@ -81,8 +98,10 @@ void MapsKU :: on_calculate_path_clicked()
         }
     }
     QString text=ui.source->currentText() + ": Lat " + latSource + " Lon " + lonSource + '\n' +
-                 ui.destination->currentText() + ": Lat " + latDestination + " Lon " + lonDestination;
+                 ui.destination->currentText() + ": Lat " + latDestination + " Lon " + lonDestination  ;
     ui.textEdit->setText(text);
+    
+   
 }
 
 void MapsKU :: set_adjacencyList() {
