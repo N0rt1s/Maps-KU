@@ -14,6 +14,8 @@
 #include <QPropertyAnimation>
 #include <QGraphicsView>
 #include <QMessageBox>
+#include <qlist.h>
+#include <qstring.h>
 
 //#include <QtGui>
 using namespace std;
@@ -29,10 +31,11 @@ public:
     int* indegree(int **array,int size);
     int smallest_array(int* arr, int size, bool* known);
     void node_to_node_path(int from, int to, int* arr, int size);
-    int* djikstra(int start, int** arr, int size);
+    int* djikstra(int start,int end, int** arr, int size);
     int **adjacencyList;
     int vertices;
     QString** data;
+    QList<QGraphicsItem*> lineList;
 public slots:
     void on_calculate_path_clicked();
 

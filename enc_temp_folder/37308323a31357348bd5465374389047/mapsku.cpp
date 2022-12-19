@@ -24,8 +24,7 @@ MapsKU::MapsKU(QWidget* parent)
     for (int i = 0; i < 10; i++)
     {
         this->data[i] = new QString[3];
-    }//coma se tor ke alag alag krta hai x or y
-
+    }
     this->data[0][0] = "Ubit"; this->data[0][1] = "24.945613, 67.115243"; this->data[0][2] = "275,70";
     this->data[1][0] = "Chemistry Canteen"; this->data[1][1] = "24.942762, 67.121296"; this->data[1][2] = "375,198"; //turn(283,204) 
     this->data[2][0] = "Pharmacy Department"; this->data[2][1] = "24.944090, 67.115438"; this->data[2][2] = "280,120";
@@ -47,8 +46,19 @@ void MapsKU::on_calculate_path_clicked()
 {
     int indsrc = ui.source->currentIndex();
     int inddes = ui.destination->currentIndex();
-   
+    //
+
     node_to_node_path(indsrc, inddes, djikstra(indsrc, inddes, this->adjacencyList, this->vertices), this->vertices);
+// //HEAD
+//    //while (roadcount == 0) {
+//     //   scene->addLine()
+//   // }
+//   // scene->addLine(128 , 220, 283, 204, bluepen);
+//    scene->addLine(275, 70, 283, 204, bluepen);
+//    scene->addLine(283, 204, 90, 231, bluepen);
+//   // scene->addLine(this->data[indexsource][2], this->data[indexsource][2], this->data[indexdes][2], this->data[indexdes][2], bluepen);
+////=======
+   
 
 
     QString latSource;
@@ -182,7 +192,6 @@ void MapsKU::node_to_node_path(int from, int to, int* arr, int size)
     }
     scene->addItem(ball);
     timer->start();*/
-    
     while (!lineList.isEmpty()) {
         delete lineList.takeFirst();
     }
@@ -197,11 +206,10 @@ void MapsKU::node_to_node_path(int from, int to, int* arr, int size)
     while (!s.empty())
     {
         qDebug() << this->data[s.top()][0] << " ";
-        QStringList pieces = this->data[s.top()][2].split(",");//yaha pe indexes se coordinates nikal rhe hn
+        QStringList pieces = this->data[s.top()][2].split(",");
         xs = pieces.value(pieces.length() - 2).toInt();
         ys = pieces.value(pieces.length() - 1).toInt();
-        //array hai na peices [x,y] jb hum isko split krte to array bnti -2 ka mtlb pehla index or -1 second hai
-        //pop ke baad wo index change hoga basically path is tarah hai ke Chemistry uni chowrangi phir pharmacy to is waja se pehle pop pe wo chemistry ke baad chowrangi jaye ga phir while ke loop mei change hota rhega
+
         s.pop();
         if (s.empty()) {
             QStringList piecesdes = this->data[to][2].split(",");
@@ -224,8 +232,7 @@ int* MapsKU::djikstra(int start,int end, int** arr, int size)
     int t = 0;
     bool* known=new bool[size];
     int* distance=new int[size];
-    int* previous = new int[size];//ye to algo hai node to node path or distance bhi aaraha
-    //dono aajaeyenge indexes hai wese to nhi end tk jo paath ayegi ubit se jese arts jana hai to pehele aap pharmacy jao ge phir uni and etc nhi wo sirf show karane ke liye rakhe hai nhi wo nikl liye the rabi ne maps se hn lekin agar isme extra paaths bhi ho to kaam krega mene lagaye nhi is waja se kiunke phir hr mor ka coordinate lagana prta hn
+    int* previous = new int[size];
     previous[start] = -1;
     for (int i = 0; i < size; i++)
     {
